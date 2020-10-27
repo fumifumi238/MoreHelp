@@ -1,0 +1,22 @@
+<div class="main users-edit">
+  <div class="container">
+    <div class="form-heading">アカウント編集</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+      
+        <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
+          <p>ユーザー名変更</p>
+          <input name="name" value="<%= @user.name %>">
+          <p>パスワード変更</p>
+          <input name="password" type="password" value="<%= @user.password %>">
+          <input type="submit" value="保存">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
