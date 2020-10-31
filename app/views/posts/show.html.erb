@@ -1,0 +1,18 @@
+<div class="main posts-show">
+  <div class="container">
+    <div class="posts-show-item">
+      <p>
+        <%= @post.content %>
+      </p>
+      <div class="post-time">
+        <%= "投稿日時: #{@post.created_at.to_s(:datetime_jp)}" %>
+      </div>
+       <div class="post-menus">
+      <% if @current_user.id == @post.user_id  %>
+        <%= link_to("編集", "/posts/#{@post.id}/edit") %>
+        <%= link_to("削除", "/posts/#{@post.id}/destroy",{method: "post"}) %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
