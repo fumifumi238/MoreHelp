@@ -7,12 +7,33 @@
       <div class="post-time">
         <%= "投稿日時: #{@post.created_at.to_s(:datetime_jp)}" %>
       </div>
-       <div class="post-menus">
-      <% if @current_user.id == @post.user_id  %>
+      <% if @current_user == nil %>
+      　 <li>コメントするにはログインしてください</li>
+      <% elsif @post.user_id == @current_user.id %>
+      <div class="post-menus">
         <%= link_to("編集", "/posts/#{@post.id}/edit") %>
         <%= link_to("削除", "/posts/#{@post.id}/destroy",{method: "post"}) %>
-      <% end %>
       </div>
     </div>
+    <% else %>
+     <h1 class="form-heading">コメントする</h1>
+    <%= form_tag("/posts/:id/comments/create") do %>
+      <div class="form">
+        <div class="form-body">
+          <textarea name="content"></textarea>
+          <input type="submit" value="投稿">
+        </div>
+      </div>
+      <% end %>
+    <% end %>
   </div>
+   <div class="posts-show-item">
+    <li>コメント一覧</li>
+    　<% @comments.each do |comment|%>
+    　 <%= truncate(comment.content,length:100) %>
+    　  <div class="post-time">
+        <%= "投稿日時: #{@post.created_at.to_s(:datetime_jp)}" %>
+      </div>
+    <% end %>
+   </div>
 </div>

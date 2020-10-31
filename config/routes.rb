@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "posts/:id" => "posts#show"
   get "posts/:id/edit" => "posts#edit"
   post "posts/:id/destroy" => "posts#destroy"
+  post "posts/:id/comments/create" => "comments#create"
   post "posts/create"=>"posts#create"
   root "home#top"
   get "/about" => "home#about"
@@ -16,5 +17,6 @@ Rails.application.routes.draw do
   post "logout" => "users#logout"
   post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

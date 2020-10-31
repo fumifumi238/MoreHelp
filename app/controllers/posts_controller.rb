@@ -1,11 +1,15 @@
 class PostsController < ApplicationController
-  
+before_action :authenticate_user,{only: [:edit,:destroy,:new,:create]}
+before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
+
+
   def index
     @posts = Post.all.page(params[:page])
   end
   
   def show
     @post = Post.find_by(id: params[:id])
+    @comments = Comment.where(post_id: @post.id)
   end
   
   def edit
@@ -31,6 +35,14 @@ class PostsController < ApplicationController
    else
       render("posts/new")
    end
+  end
+  
+  def  ensure_correct_user
+    @post = Post.find_by(id: params[:id])
+    if @post.user_id != @current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to("/posts/index")
+    end
   end
 
 end
