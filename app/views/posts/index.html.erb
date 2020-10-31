@@ -1,0 +1,12 @@
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |post| %>
+      <div class="posts-index-item">
+        <div class="post-right">
+          <%= link_to(truncate(post.content,length:100), "/posts/#{post.id}") %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @posts %>
+  </div>
+</div>
