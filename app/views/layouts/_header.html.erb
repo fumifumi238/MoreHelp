@@ -1,0 +1,39 @@
+ <header class="navbar navbar-fixed-top navbar-default" >
+  <div class="container">
+    <%= link_to "MoreHelp", root_path ,id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if @current_user%>
+        <!-- ログインしている状態でヘッダーに表示するHTMLを貼り付けてください -->
+        <li>
+          <%= link_to @current_user.name,user_path(@current_user.id) %>
+        </li>
+        <li>
+          <%= link_to "投稿一覧", posts_path %>
+        </li>
+        <li>
+          <%= link_to "新規投稿", new_post_path %>
+        </li>
+        <li>
+          <!-- ログアウト用のリンクを追加してください -->
+          <%= link_to "ログアウト", logout_path, method: :delete %>
+        </li>
+        <% else %>
+        <!-- ログインしていない状態でヘッダーに表示するHTMLを貼り付けてください -->
+        <li>
+          <%= link_to "MoreHelpとは", about_path %>
+        </li>
+        <li>
+          <%= link_to "投稿一覧", posts_path %>
+        </li>
+        <li>
+          <%= link_to "新規登録", new_user_path %>
+        </li>
+        <li>
+          <%= link_to "ログイン", login_path %>
+        </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

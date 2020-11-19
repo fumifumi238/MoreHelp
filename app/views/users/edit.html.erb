@@ -3,18 +3,12 @@
     <div class="form-heading">アカウント編集</div>
     <div class="form users-form">
       <div class="form-body">
-        <% @user.errors.full_messages.each do |message| %>
-          <div class="form-error">
-            <%= message %>
-          </div>
-        <% end %>
-      
-        <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
-          <p>ユーザー名変更</p>
-          <input name="name" value="<%= @user.name %>">
-          <p>パスワード変更</p>
-          <input name="password" type="password" value="<%= @user.password %>">
-          <input type="submit" value="保存">
+        <%= form_for(@user) do |f| %>
+        <%= f.label :name,"ユーザー名を変更する" %>
+        <%= f.text_field :name %>
+        <%= f.label :password,"パスワードを変更する" %>
+        <%= f.password_field :password %>
+        <%= f.submit "変更を保存する", class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>
