@@ -1,9 +1,15 @@
 <div class="main posts-index">
   <div class="container">
+    <%= search_form_for @search do |f| %>
+      <%= f.search_field :content_cont, placeholder: "検索したいキーワードを入れてください" %>
+      <%= f.select :tag_id_eq, [['恋愛', 1], ['人間関係', 2], ['勉強', 3],['仕事',4],['学校',5],['身体',6],['その他',7]] , prompt: "カテゴリーを選んでください"%>
+       <%= f.submit %>
+      <% end %>
+    <p>投稿一覧</p>
     <% @posts.each do |post| %>
       <div class="posts-index-item">
         <div class="post-right">
-          <%= link_to(truncate(post.content,length:100), "/posts/#{post.id}") %>
+          <%= link_to truncate(post.content,length:100), post %>
         </div>
       </div>
     <% end %>

@@ -4,45 +4,66 @@ before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
 
   def index
-    @posts = Post.all.page(params[:page])
+     @search = Post.ransack(params[:q])
+     @posts = @search.result.page(params[:page])
   end
-  
+
   def show
     @post = Post.find_by(id: params[:id])
+    @comment = Comment.new
     @comments = Comment.where(post_id: @post.id)
   end
-  
+
+  def new
+    @post = Post.new
+  end
+
   def edit
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find(params[:id])
   end
   
   def destroy
     @post = Post.find_by(id: params[:id])
     @post.destroy
-    flash[:notice] = "投稿を削除しました"
-    redirect_to("/posts/index")
+    flash[:success] = "投稿を削除しました"
+    redirect_to posts_url
   end
   
-  def new
-    @post = Post.new
+  def update
+     @post = Post.find(params[:id])
+     if @post.update(post_params)
+      flash[:success] = "プロフィールが更新されました"
+      redirect_to @post
+     else
+      render "edit"
+     end
   end
   
   def create
-    @post = Post.new(content: params[:content],user_id: @current_user.id)
+    @post = Post.new(post_params)
+    @post.user_id = @current_user.id
    if @post.save
-      flash[:notice] = "投稿を作成しました"
-      redirect_to("/posts/index")
+      flash[:success] = "投稿を作成しました"
+      redirect_to posts_url
    else
-      render("posts/new")
+      render "new"
    end
   end
   
   def  ensure_correct_user
     @post = Post.find_by(id: params[:id])
     if @post.user_id != @current_user.id
-      flash[:notice] = "権限がありません"
-      redirect_to("/posts/index")
+      flash[:danger] = "権限がありません"
+      redirect_to posts_path
     end
   end
 
+
+
+  private
+    def post_params
+      params.require(:post).permit(:content,:tag_id)
+    end
+  
+ 
 end
