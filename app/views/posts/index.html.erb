@@ -5,7 +5,7 @@
       <%= f.select :tag_id_eq, [['恋愛', 1], ['人間関係', 2], ['勉強', 3],['仕事',4],['学校',5],['身体',6],['その他',7]] , prompt: "カテゴリーを選んでください"%>
        <%= f.submit %>
       <% end %>
-    <p>投稿一覧</p>
+    <p class = "posts-list">投稿一覧</p>
     <% @posts.each do |post| %>
       <div class="posts-index-item">
         <div class="post-right">

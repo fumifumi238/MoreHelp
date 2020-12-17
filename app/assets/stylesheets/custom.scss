@@ -13,7 +13,14 @@ $gray-medium-light: #eaeaea;
 
 body {
   padding-top: 60px;
+  background: image-url('cafe.jpeg');
+  background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
+
+
+
 
 section {
   overflow: auto;
@@ -212,16 +219,20 @@ input {
 /* home about */
 
 
+
 .about-main h2 {
   font-size: 64px;
   font-weight: 500;
   line-height: 1.4;
+  color: $gray-medium-light;
 }
 
 .about-main p {
   font-weight: 200;
   font-size: 20px;
   text-align: center;
+  color: white;
+  opacity: 0.8;
 }
 
 .top-main {
@@ -239,3 +250,16 @@ input {
   background-size: cover;
 }
 
+.do-comment{
+  text-align: center;
+}
+
+.comment-show{
+  color: white;
+  font-size: 20px;
+}
+
+.posts-list{
+  text-align: center;
+  color: white;
+}
