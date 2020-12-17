@@ -2,6 +2,9 @@
   <div class="container">
     <div class="posts-show-item">
       <p>
+        <%= @post.user.name %>　さん
+      </p>
+      <p>
         <%= @post.content %>
       </p>
       <div class="post-time">
@@ -13,11 +16,10 @@
         <%= link_to "削除", post_path(@post), method: :delete %>
        <% end %>
       </div>
-    </div>
      <% if @current_user == nil %>
-      <li>コメントするにはログインしてください</li>
+      <p class = "comment-show">コメントするにはログインしてください</p>
     <% else %>
-      <p>コメントする</p>
+      <p class = "comment-show">コメントする(300字以内)</p>
         <%= form_for [@post, @comment] do |f| %>
   　　      <div class="field">
     　　      <%= f.text_area :content, placeholder: "ここにコメントしてください" %>
@@ -28,10 +30,16 @@
    <div class="posts-show-item">
     <li>コメント一覧</li>
     　<% @comments.each do |comment|%>
-    　 <%= truncate(comment.content,length:100) %>
+    　 <% if @post.user.name == comment.user.name %>
+    　   <h3 class="text-danger"><%= comment.user.name %> さん</h3>
+    　 <% else %>
+    　   <h4><%= comment.user.name %> さん</h4>
+    　 <% end %>
+    　 <%= comment.content %>
     　  <div class="post-time">
-        <%= "投稿日時: #{@post.created_at.to_s(:datetime_jp)}" %>
+        <%= "投稿日時: #{comment.created_at.to_s(:datetime_jp)}" %>
       </div>
     <% end %>
+    　</div>
    </div>
 </div>
