@@ -46,6 +46,7 @@ before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
       flash[:success] = "投稿を作成しました"
       redirect_to posts_url
    else
+      flash[:danger] = "投稿できませんでした"
       render "new"
    end
   end
@@ -62,7 +63,7 @@ before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
   private
     def post_params
-      params.require(:post).permit(:content,:tag_id)
+      params.require(:post).permit(:content,:tag_id,:anonymous_check)
     end
   
  

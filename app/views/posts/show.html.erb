@@ -2,10 +2,14 @@
   <div class="container">
     <div class="posts-show-item">
       <p>
+        <% if @post.anonymous_check%>
+         匿名　さん
+        <% else %>
         <%= @post.user.name %>　さん
+        <% end %>
       </p>
       <p>
-        <%= @post.content %>
+        <%= simple_format(@post.content) %>
       </p>
       <div class="post-time">
         <%= "投稿日時: #{@post.created_at.to_s(:datetime_jp)}" %>
@@ -21,21 +25,24 @@
     <% else %>
       <p class = "comment-show">コメントする(300字以内)</p>
         <%= form_for [@post, @comment] do |f| %>
-  　　      <div class="field">
-    　　      <%= f.text_area :content, placeholder: "ここにコメントしてください" %>
+  　　      <div class="form-group">
+    　　      <%= f.text_area :content,class: 'form-control  js-comment ', placeholder: "ここにコメントしてください" %>
   　　      </div>
+  　　      <P class="js-comment-count pull-right"></P>
   　     <%= f.submit "コメントする", class: "btn btn-primary" %>
 　　  <% end %>
 　　<% end %>
    <div class="posts-show-item">
     <li>コメント一覧</li>
     　<% @comments.each do |comment|%>
-    　 <% if @post.user.name == comment.user.name %>
+    　<% if @post.user.name == comment.user.name && @post.anonymous_check %>
+    　   <h3 class="text-danger">匿名 さん</h3>
+    　 <% elsif @post.user.name == comment.user.name %>
     　   <h3 class="text-danger"><%= comment.user.name %> さん</h3>
     　 <% else %>
     　   <h4><%= comment.user.name %> さん</h4>
     　 <% end %>
-    　 <%= comment.content %>
+    　 <%= simple_format(comment.content) %>
     　  <div class="post-time">
         <%= "投稿日時: #{comment.created_at.to_s(:datetime_jp)}" %>
       </div>

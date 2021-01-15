@@ -2,14 +2,21 @@
   <div class="container">
     <h1 class="form-heading">投稿する(1000字以内)</h1>
       <%= form_for(@post) do |f| %>
-        <div class="field">
-          <%= f.text_area :content, placeholder: "ここに内容を入力してください..." %>
+        <div class="form-group">
+          <%= f.text_area :content,class: 'form-control  js-text', placeholder: "ここに内容を入力してください..." %>
         </div>
+        <P class="js-text-count pull-right"></P>
         <div class="text-warning">
         <%= f.label :tag_id,"カテゴリーを指定してください" %>
          </div>
         <%= f.select :tag_id, [['恋愛', 1], ['人間関係', 2], ['勉強', 3],['仕事',4],['学校',5],['身体',6],['その他',7]],
         {include_blank: '指定しない'}, class: 'tag' %>
+        
+      
+        <%= f.label :anonymous_check, class: "checkbox inline" do %>
+        <%= f.check_box :anonymous_check %>
+        <span>匿名で投稿する場合は、ここにチェックを入れてください</span>
+        <% end %>
       <%= f.submit "投稿する", class: "btn btn-primary" %>
     <% end %>
   </div>
