@@ -20,6 +20,7 @@
 }
 
 .post-right {
+  color: black;
   float: left;
   width: 90%;
   padding-left: 25px;
@@ -89,19 +90,11 @@
   opacity: 0.5;
 }
 
-.posts-show-item .fa {
-  font-size: 16px;
-  margin-right: 3px;
-}
 
-.like-btn{
-  color: #8899a6;
+.posts-list{
+  text-align: center;
+  color: white;
 }
-
-.like-btn-unlike{
-  color: #ff2581;
-}
-
 .comment-show{
   text-align: center;
 }

@@ -9,7 +9,7 @@
     <% @posts.each do |post| %>
       <div class="posts-index-item">
         <div class="post-right">
-          <%= link_to truncate(post.content,length:100), post %>
+          <%= link_to truncate(post.content,length:100), post, data: {"turbolinks" => false} %>
         </div>
       </div>
     <% end %>

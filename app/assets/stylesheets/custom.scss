@@ -185,16 +185,14 @@ input {
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
+  float: left;
   span {
-    margin-left: 20px;
+    margin-left: 350px;
     font-weight: normal;
+    color: white;
   }
 }
 
-#session_remember_me {
-  width: auto;
-  margin-left: 0;
-}
 
 /* Users index */
 
@@ -263,3 +261,4 @@ input {
   text-align: center;
   color: white;
 }
+
