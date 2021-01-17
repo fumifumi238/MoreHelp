@@ -2,7 +2,7 @@
   <div class="container">
     <div class="posts-show-item">
       <p>
-        <% if @post.anonymous_check%>
+        <% if @post.anonymous_check %>
          匿名　さん
         <% else %>
         <%= @post.user.name %>　さん
@@ -14,11 +14,16 @@
       <div class="post-time">
         <%= "投稿日時: #{@post.created_at.to_s(:datetime_jp)}" %>
       </div>
+        <div class="post-menus">
        <% if @current_user == nil%>
+       
+       <% elsif @current_user.admin?%>
+        <%= link_to "削除", post_path(@post), method: :delete %>
        <% elsif @post.user_id == @current_user.id %>
-        <%= link_to "編集", edit_post_path(@post) %>
+        <%= link_to "編集", edit_post_path(@post), data: {"turbolinks" => false} %>
         <%= link_to "削除", post_path(@post), method: :delete %>
        <% end %>
+       </div>
       </div>
      <% if @current_user == nil %>
       <p class = "comment-show">コメントするにはログインしてください</p>

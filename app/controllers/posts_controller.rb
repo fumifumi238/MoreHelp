@@ -32,9 +32,10 @@ before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
   def update
      @post = Post.find(params[:id])
      if @post.update(post_params)
-      flash[:success] = "プロフィールが更新されました"
+      flash[:success] = "投稿が編集されました"
       redirect_to @post
      else
+      flash[:danger] = "投稿できませんでした"
       render "edit"
      end
   end
@@ -53,7 +54,7 @@ before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
   
   def  ensure_correct_user
     @post = Post.find_by(id: params[:id])
-    if @post.user_id != @current_user.id
+    if @post.user_id != @current_user.id && !@current_user.admin?
       flash[:danger] = "権限がありません"
       redirect_to posts_path
     end
@@ -62,6 +63,7 @@ before_action :ensure_correct_user,{only: [:edit, :update, :destroy]}
 
 
   private
+  
     def post_params
       params.require(:post).permit(:content,:tag_id,:anonymous_check)
     end

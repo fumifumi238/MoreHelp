@@ -11,7 +11,6 @@
          </div>
         <%= f.select :tag_id, [['恋愛', 1], ['人間関係', 2], ['勉強', 3],['仕事',4],['学校',5],['身体',6],['その他',7]],
         {include_blank: '指定しない'}, class: 'tag' %>
-        
       
         <%= f.label :anonymous_check, class: "checkbox inline" do %>
         <%= f.check_box :anonymous_check %>
