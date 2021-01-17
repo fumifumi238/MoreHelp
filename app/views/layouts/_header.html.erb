@@ -5,7 +5,11 @@
       <ul class="nav navbar-nav navbar-right">
         <% if @current_user%>
         <li>
+         <% if @current_user.admin?%>
+          <%= link_to "登録者一覧", users_path %>
+         <% else %>
           <%= link_to @current_user.name,user_path(@current_user.id) %>
+         <% end %>
         </li>
         <li>
           <%= link_to "投稿一覧", posts_path %>

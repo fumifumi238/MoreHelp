@@ -1,0 +1,18 @@
+ <div class="main posts-index">
+  <div class="container">
+ <p class="posts-list">登録者一覧</p>
+    <% @users.each do |user| %>
+      <div class="posts-index-item">
+        <div class="post-right">
+         ユーザー名： <%=link_to user.name,user %>　メールアドレス：<%= user.email %>
+            <% if @current_user.admin? && user != @current_user  %>
+              <%= link_to "削除", user, method: :delete,
+                                  data: { confirm: "本当に削除してもよろしいですか?" },
+                                  class: "pull-right"%>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+    <%= paginate @users %>
+  </div>
+  </div>
